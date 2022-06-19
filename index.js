@@ -1,25 +1,27 @@
 const express = require('express')
+const dotenv = require('dotenv')
 
+dotenv.config()
+const PORT = process.env.PORT || 8888
+const CLIENT_ID = process.env.SPOTIFY_CLIENT_ID
+const CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET
+const REDIRECT_URI = process.env.SPOTIFY_REDIRECT_URI
 const app = express()
 
-app.get("/", (req, res) => {
+app.get('/', (req, res) => {
   const data = {
-    name: "abdul",
-    isAwesome: true
+    name: 'abdul',
+    isAwesome: true,
   }
 
   res.json(data)
 })
 
-app.get('/awesome-gen', (req, res) => {
-  const {name, isAwesome} = req.query;
-  res.send(`${name} is ${JSON.parse(isAwesome) ? "really" : "not"} awesome`)
+// LOGIN ROUTE
+app.get('/login', (req, res) => {
+  res.send('login in with spotify')
 })
 
-
-const port = 8888
-app.listen(port, () => {
-  console.log("Server listening on http://localhost:" + port)
+app.listen(PORT, () => {
+  console.log('Server listening on http://localhost:' + PORT)
 })
-
- 
